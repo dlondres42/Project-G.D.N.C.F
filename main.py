@@ -1,168 +1,139 @@
-import pygame
+import sys
+import pygame as pg
+from pygame.locals import *
+import constants as cons
+import sprites as sp
+import animations as ani
 
-pygame.init()
+# initiazliation
+pg.init()
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-BLUE = (50, 50, 255)
+# basic configurations
+FramesPerSec = pg.time.Clock()
 
+DISPLAYSURF = pg.display.set_mode(cons.screen)
+pg.display.set_caption("Project G.D.N.C.F")
 
-#                                    IMAGENS DAS ANIMAÇÕES, BACKGROUND E INTRO
-########################################################################################################################
-jump_s = pygame.image.load('images/standingJUMP.png')
-jump_l = pygame.image.load('images/LJUMP.png')
-jump_r = pygame.image.load('images/RJUMP.png')
-char = pygame.image.load('images/standing.png')
+pg.event.set_blocked(TEXTINPUT)
 
-walkRight = [pygame.image.load('images/R1.png'), pygame.image.load('images/R2.png'), pygame.image.load('images/R3.png'),
-             pygame.image.load('images/R4.png'), pygame.image.load('images/R5.png'), pygame.image.load('images/R6.png'),
-             pygame.image.load('images/R7.png'), pygame.image.load('images/R8.png'),
-             pygame.image.load('images/R9.png'), pygame.image.load('images/R10.png'),
-             pygame.image.load('images/R11.png'),
-             pygame.image.load('images/R12.png')]
-walkLeft = [pygame.image.load('images/L1.png'), pygame.image.load('images/L2.png'), pygame.image.load('images/L3.png'),
-            pygame.image.load('images/L4.png'), pygame.image.load('images/L5.png'), pygame.image.load('images/L6.png'),
-            pygame.image.load('images/L7.png'), pygame.image.load('images/L8.png'), pygame.image.load('images/L9.png'),
-            pygame.image.load('images/L10.png'), pygame.image.load('images/L11.png'),
-            pygame.image.load('images/L12.png')]
+# intro musics
+pg.mixer.music.load('music/01 -Glorious morning-.mp3')
+pg.mixer.music.play(-1)
+pg.mixer.music.set_volume(0.5)
 
-background = pygame.image.load('images/forest.png')
-intro_foto = pygame.image.load('images/introfoto.png')
-########################################################################################################################
-
-
-pygame.display.set_caption("Game IP")
-
-window = pygame.display.set_mode((1100, 450))
-clock = pygame.time.Clock()
-
-
-class Player(object):
-    def __init__(self, x, y, width, height):
-        self.x = x
-        self.y = y
-        self.vel = 5
-        self.width = width
-        self.height = height
-        self.isJump = False
-        self.jumpCount = 10
-        self.left = False
-        self.right = False
-        self.walkCount = 0
-
-    def draw(self, window):
-        if self.walkCount + 1 >= 37:
-            self.walkCount = 0
-
-        if self.isJump and not self.left and not self.right:
-            window.blit(jump_s, (self.x, self.y))
-
-        if self.isJump and self.left:
-            window.blit(jump_l, (self.x, self.y))
-
-        if self.isJump and self.right:
-            window.blit(jump_r, (self.x, self.y))
-
-        if self.left and not self.isJump:
-            window.blit(walkLeft[self.walkCount // 3], (self.x, self.y))
-            self.walkCount += 1
-        elif self.right and not self.isJump:
-            window.blit(walkRight[self.walkCount // 3], (self.x, self.y))
-            self.walkCount += 1
-        if not self.left and not self.right and not self.isJump:
-            window.blit(char, (self.x, self.y))
-            self.walkCount = 0
-
-
-
-def redrawGameWindow():
-    window.blit(background, (0, 0))
-    jogador.draw(window)
-    pygame.display.update()
-
-
-run = True
+# start screen
 intro = True
-################################################## MÚSICA 1 ###########################################################
-pygame.mixer.music.load('music/01 -Glorious morning-.mp3')
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.5)
-########################################################################################################################
-
-################################################## INTRO ###############################################################
-
 while intro:
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
+    # setting quit option
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
             quit()
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                pygame.mixer.music.stop()
+        # setting skip of start screen
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_SPACE:
+                pg.mixer.music.stop()
                 intro = False
 
-    window.blit(intro_foto, (0, 0))
-    clock.tick(60)
-    pygame.display.update()
+            # setting quit by pressing Esc
+            elif event.key == pg.K_ESCAPE:
+                pg.quit()
+                sys.exit()
 
+    DISPLAYSURF.blit(ani.intro_foto, (0, 0))
+    FramesPerSec.tick(60)
+    pg.display.update()
 
-################################################## MÚSICA 2 ###########################################################
-pygame.mixer.music.load('music/76677_newgrounds_field_.mp3')
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.5)
-########################################################################################################################
+# gameplay musics
+pg.mixer.music.load('music/76677_newgrounds_field_.mp3')
+pg.mixer.music.play(-1)
+pg.mixer.music.set_volume(0.35)
 
-jogador = Player(50, 350, 50, 40)
+# game loop
+while True:
 
-
-while run:
-
-    clock.tick(60)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-            quit()
-
-    keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_LEFT] and jogador.x - 25 > jogador.vel:
-        jogador.x -= jogador.vel
-        jogador.left = True
-        jogador.right = False
-
-
-    elif keys[pygame.K_RIGHT] and jogador.x < 1100 - jogador.vel - jogador.width:
-        jogador.x += jogador.vel
-        jogador.left = False
-        jogador.right = True
-
+    if sp.player.is_standing(sp.level.floors):
+        sp.player.is_jumping = False
     else:
-        jogador.left = False
-        jogador.right = False
-        jogador.walkCount = 0
+        sp.player.is_jumping = True
 
-    if not jogador.isJump:
-        if keys[pygame.K_SPACE]:
-            jogador.isJump = True
-            jogador.left = False
-            jogador.right = False
-            jogador.walkCount = 0
-    else:
-        if jogador.jumpCount >= -10:
-            neg = 1
-            if jogador.jumpCount < 0:
-                neg = -1
+    # setting quit option
+    for event in pg.event.get():
+        if event.type == QUIT:
+            pg.quit()
+            sys.exit()
 
-            jogador.y -= (jogador.jumpCount ** 2) * 0.35 * neg
-            jogador.jumpCount -= 1
-        else:
-            jogador.jumpCount = 10
-            jogador.isJump = False
+        # setting player movement control; walk and jump with keyboard arrows
+        # or W A S D; it's also possible to jump with SPACE and quit with Esc.
+        elif event.type == pg.KEYDOWN:
+            if event.key == pg.K_LEFT or event.key == pg.K_a:
+                sp.player.is_left = True
+                sp.player.is_right = False
+                sp.player.move_left()
 
+            elif event.key == pg.K_RIGHT or event.key == pg.K_d:
+                sp.player.is_left = False
+                sp.player.is_right = True
+                sp.player.move_right()
 
-    redrawGameWindow()
+            # else:
+                # sp.player.is_left = False
+                # sp.player.is_right = False
+                # sp.player.walk_count = 0
 
-pygame.quit()
+            elif (event.key == pg.K_UP or event.key == pg.K_w or event.key == pg.K_SPACE) and not sp.player.is_jumping:
+                sp.player.jump()
+
+            elif event.key == pg.K_ESCAPE:
+                pg.quit()
+                sys.exit()
+
+        # block relating to the collection of the first collectible. when
+        # collected, the player becomes able to change levels
+            elif event.key == pg.K_c and sp.change_collectible.collected:
+                cons.level_can_change = not cons.level_can_change
+
+        # setting end of movement when the buttons are unpressed
+        elif event.type == pg.KEYUP:
+            if (event.key == pg.K_LEFT or event.key == pg.K_a) and sp.player.speed_x < 0:
+                sp.player.is_left = False
+                sp.player.walk_count = 0
+                sp.player.stop()
+
+            if (event.key == pg.K_RIGHT or event.key == pg.K_d) and sp.player.speed_x > 0:
+                sp.player.is_right = False
+                sp.player.walk_count = 0
+                sp.player.stop()
+
+    # updating the player's position according to the movement vector
+    # generated above
+    sp.player.update(sp.level)
+
+    # checking whether the player reached some of the ends of the screen
+    # and changing the level if so (provieded he is able to change levels
+    # already)
+    if sp.player.rect.left < 0:
+        sp.player.teleport_right()
+        if cons.level_can_change and sp.level.current > min(sp.all_sprites.keys()):
+            sp.level.change(-1)
+            sp.player.update(sp.level)
+
+    if sp.player.rect.right > cons.width:
+        sp.player.teleport_left()
+        if cons.level_can_change and sp.level.current < max(sp.all_sprites.keys()):
+            sp.level.change(1)
+            sp.player.update(sp.level)
+
+    # animating what happened above
+    DISPLAYSURF.blit(ani.background, (0, 0))
+
+    sp.level.draw(DISPLAYSURF)
+
+    sp.player.draw(DISPLAYSURF)
+
+    pg.display.update()
+
+    # setting the FPS (to 60)
+    FramesPerSec.tick(cons.FPS)
