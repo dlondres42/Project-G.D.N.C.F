@@ -81,6 +81,26 @@ ghost3 = obj.Enemy(cons.ghost3_x, cons.ghost3_end,
                    cons.ghost3_y, cons.ghost3_vel)
 ghost4 = obj.Enemy(cons.ghost4_x, cons.ghost4_end,
                    cons.ghost4_y, cons.ghost4_vel)
+ghost5 = obj.Enemy(cons.ghost5_x, cons.ghost5_end,
+                   cons.ghost5_y, cons.ghost5_vel)
+ghost6 = obj.Enemy(cons.ghost6_x, cons.ghost6_end,
+                   cons.ghost6_y, cons.ghost6_vel)
+ghost7 = obj.Enemy(cons.ghost7_x, cons.ghost7_end,
+                   cons.ghost7_y, cons.ghost7_vel)
+ghost8 = obj.Enemy(cons.ghost8_x, cons.ghost8_end,
+                   cons.ghost8_y, cons.ghost8_vel)
+ghost9 = obj.Enemy(cons.ghost9_x, cons.ghost9_end,
+                   cons.ghost9_y, cons.ghost9_vel)
+ghost10 = obj.Enemy(cons.ghost10_x, cons.ghost10_end,
+                   cons.ghost10_y, cons.ghost10_vel)
+ghost11 = obj.Enemy(cons.ghost11_x, cons.ghost11_end,
+                   cons.ghost11_y, cons.ghost11_vel)
+ghost12 = obj.Enemy(cons.ghost12_x, cons.ghost12_end,
+                   cons.ghost12_y, cons.ghost12_vel)
+ghost13 = obj.Enemy(cons.ghost13_x, cons.ghost13_end,
+                   cons.ghost13_y, cons.ghost13_vel)
+ghost14 = obj.Enemy(cons.ghost14_x, cons.ghost14_end,
+                   cons.ghost14_y, cons.ghost14_vel)
 
 # LEVEL 3 SPRITES
 
@@ -105,6 +125,17 @@ platform42 = obj.Floor(cons.plat42_posit, cons.plat42_area)
 enhanced_attack_col = obj.LastingCollectible(
     ani.cage6, (upper_platform.rect.centerx, upper_platform.rect.centery-48))
 
+# enemies
+ghost15 = obj.Enemy(cons.ghost15_x, cons.ghost15_end,
+                   cons.ghost15_y, cons.ghost15_vel)
+ghost16 = obj.Enemy(cons.ghost16_x, cons.ghost16_end,
+                   cons.ghost16_y, cons.ghost16_vel)
+ghost17 = obj.Enemy(cons.ghost17_x, cons.ghost17_end,
+                   cons.ghost17_y, cons.ghost17_vel)
+ghost18 = obj.Enemy(cons.ghost18_x, cons.ghost18_end,
+                   cons.ghost18_y, cons.ghost18_vel)
+ghost19 = obj.Enemy(cons.ghost19_x, cons.ghost19_end,
+                   cons.ghost19_y, cons.ghost19_vel)
 # The following dictionary contains every sprite in the game in the following
 # manner: its keys are numbers that relate to each game level. The value of
 # each level number is a second dicionary. The velues of that second dicionary
@@ -140,16 +171,17 @@ all_sprites = {
                                         platform30, platform31, platform32,
                                         ceiling),
         'collectibles': pg.sprite.Group(),
-        'enemies':      pg.sprite.Group(ghost1, ghost2, ghost3, ghost4)
+        'enemies':      pg.sprite.Group(ghost1, ghost2, ghost3, ghost4, ghost5, ghost6, ghost7, ghost8,
+                                        ghost9, ghost10, ghost11, ghost12, ghost13, ghost14)
         },
-    3: {'floors':       pg.sprite.Group(half_ground_1, half_groun_2, left_wall,
+    3: {'floors':       pg.sprite.Group(movable_plat, half_ground_1, half_groun_2, left_wall,
                                         right_wall, upper_platform, platform33,
                                         platform34, platform35, platform36,
                                         platform37, platform38, platform39,
                                         platform40, platform41, platform42,
                                         ceiling),
         'collectibles': pg.sprite.Group(enhanced_attack_col),
-        'enemies':      pg.sprite.Group()
+        'enemies':      pg.sprite.Group(ghost15, ghost16, ghost17, ghost18, ghost19)
         }
 }
 

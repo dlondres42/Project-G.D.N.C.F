@@ -23,7 +23,9 @@ inflat_plat_1 = False
 
 # skipping to level 2
 sp.level.change()
+sp.level.change()
 sp.attack_col.collected = True
+sp.double_jump_col.collected = True
 
 # game loop
 while True:

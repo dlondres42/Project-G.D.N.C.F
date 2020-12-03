@@ -107,10 +107,20 @@ ceiling_posit = (0, -1)
 # double jump collectible defined in sprites.py
 
 # enemies
-ghost1_x, ghost1_end, ghost1_y, ghost1_vel = (21, 221, 360, 5)
-ghost2_x, ghost2_end, ghost2_y, ghost2_vel = (230, 430, 360, 6)
+ghost1_x, ghost1_end, ghost1_y, ghost1_vel = (21, 221, 360, 4)
+ghost2_x, ghost2_end, ghost2_y, ghost2_vel = (230, 430, 360, 3)
 ghost3_x, ghost3_end, ghost3_y, ghost3_vel = (503, 703, 360, 4)
-ghost4_x, ghost4_end, ghost4_y, ghost4_vel = (763, 963, 360, 5)
+ghost4_x, ghost4_end, ghost4_y, ghost4_vel = (763, 963, 360, 3)
+ghost5_x, ghost5_end, ghost5_y, ghost5_vel = (21, 221, 279, 3)
+ghost6_x, ghost6_end, ghost6_y, ghost6_vel = (230, 430, 279, 4)
+ghost7_x, ghost7_end, ghost7_y, ghost7_vel = (503, 703, 279, 3)
+ghost8_x, ghost8_end, ghost8_y, ghost8_vel = (763, 963, 279, 4)
+ghost9_x, ghost9_end, ghost9_y, ghost9_vel = (21, 221, 197, 4)
+ghost10_x, ghost10_end, ghost10_y, ghost10_vel = (230, 430, 197, 3)
+ghost11_x, ghost11_end, ghost11_y, ghost11_vel = (503, 703, 197, 4)
+ghost12_x, ghost12_end, ghost12_y, ghost12_vel = (763, 963, 197, 3)
+ghost13_x, ghost13_end, ghost13_y, ghost13_vel = (503, 703, 109, 3)
+ghost14_x, ghost14_end, ghost14_y, ghost14_vel = (763, 963, 109, 3)
 
 
 # LEVEL 3
@@ -138,6 +148,13 @@ plat40_posit, plat40_area = (187, 82), (30, 30)
 plat41_posit, plat41_area = (392, 62), (30, 30)
 plat42_posit, plat42_area = (630, 371), (30, 30)
 # ceiling is a floor of level 3
+
+# enemies
+ghost15_x, ghost15_end, ghost15_y, ghost15_vel = (45, 294, 360, 5)
+ghost16_x, ghost16_end, ghost16_y, ghost16_vel = (820, 900, 197, 1)
+ghost17_x, ghost17_end, ghost17_y, ghost17_vel = (700, 850, 360, 3)
+ghost18_x, ghost18_end, ghost18_y, ghost18_vel = (900, 1050, 360, 3)
+ghost19_x, ghost19_end, ghost19_y, ghost19_vel = (528, 620, 117, 2)
 
 # level 3's collectible is defined in sprites.py
 
