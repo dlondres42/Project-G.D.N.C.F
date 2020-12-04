@@ -1,0 +1,15 @@
+- O string "npcs" foi trocado pelo string "enemies" em sprites.py e em objects.py
+- Level 2 criado
+- Level 3 criado
+- Ataque criado (ele ainda não faz nada além de aparecer porque não há inimigos)
+- A tecla espaço agora faz o jogador atacar (a partir do level 2). Não é mais possível
+pular apertando espaço (ficou difícil achar uma tecla boa pro ataque que não fosse o
+espaço e ainda deixar o jogar andar tanto com W A S D quanto com as setas do teclado)
+- Pulo duplo e coletável do pulo duplo criados
+- HP criado
+- Game over criado (o game over ocorre quando o HP é zero)
+- Criado sistema de levar dano: ser atingido por um inimigo tira 50 de HP e deixa o
+personagem imune a dano por 3 segundos; enquanto está imune, ele fica com menos opacidade
+e piscando
+- Animação do ataque programada
+- Coletável shield criado
